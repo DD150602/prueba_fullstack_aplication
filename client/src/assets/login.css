@@ -1,0 +1,44 @@
+.container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #000000;
+}
+
+.container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.container label {
+  margin-bottom: 10px;
+}
+
+.container input {
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #272020;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.container button:hover {
+  background-color: #0056b3;
+}
