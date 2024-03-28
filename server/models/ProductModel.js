@@ -1,4 +1,4 @@
-import db from './db.js'
+import db from '../config/dataBase.js'
 
 export default class ProductModel {
   static async getAllProducts () {

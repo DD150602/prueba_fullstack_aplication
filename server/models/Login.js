@@ -1,9 +1,9 @@
-import bd from './db.js'
+import db from '../config/dataBase.js'
 
 export default class LoginModel {
   static async login ({ userName, userPassword }) {
     try {
-      const [usuario] = await bd.query(
+      const [usuario] = await db.query(
         'SELECT nombre_usuario, contrasena_usuario FROM users WHERE nombre_usuario = ?',
         [userName]
       )
