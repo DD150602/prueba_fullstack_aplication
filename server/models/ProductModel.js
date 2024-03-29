@@ -1,9 +1,12 @@
 import db from '../config/dataBase.js'
+import { NoData } from '../schemas/errorSchema.js'
 
 export default class ProductModel {
   static async getAllProducts () {
     try {
       const [res] = await db.query('SELECT codigo, nombre, descripcion, fecha_compra, valor_compra, proveedor FROM products')
+      if (!res) throw new NoData()
+      if (res.length === 0) throw new NoData()
 
       return res
     } catch (error) {
@@ -13,7 +16,9 @@ export default class ProductModel {
 
   static async getProductById ({ id }) {
     try {
-      const [res] = await db.query('SELECT codigo, nombre, descripcion, fecha_compra, valor_compra, proveedor FROM products WHERE codigo = ?', [id])
+      const [[res]] = await db.query('SELECT codigo, nombre, descripcion, fecha_compra, valor_compra, proveedor FROM products WHERE codigo = ?', [id])
+      if (!res) throw new NoData()
+      if (res.length === 0) throw new NoData()
 
       return res
     } catch (error) {
@@ -25,7 +30,7 @@ export default class ProductModel {
     try {
       const { nombre, descripcion, fechaCompra, valorCompra, proveedor } = input
 
-      const [res] = await db.query('INSERT INTO products (nombre, descripcion, fecha_compra, valor_compra, proveedor) VALUES (?,?,?,?,?)', [nombre, descripcion, fechaCompra, valorCompra, proveedor])
+      await db.query('INSERT INTO products (nombre, descripcion, fecha_compra, valor_compra, proveedor) VALUES (?,?,?,?,?)', [nombre, descripcion, fechaCompra, valorCompra, proveedor])
 
       return 'producto agregado con exito'
     } catch (error) {
@@ -36,18 +41,17 @@ export default class ProductModel {
   static async updateProduct ({ id, input }) {
     try {
       const { nombre, descripcion, fechaCompra, valorCompra, proveedor } = input
-      const [res] = await db.query('UPDATE products SET nombre = ?, descripcion = ?, fecha_compra = ?, valor_compra = ?, proveedor = ? WHERE codigo = ?', [nombre, descripcion, fechaCompra, valorCompra, proveedor, id])
+      await db.query('UPDATE products SET nombre = ?, descripcion = ?, fecha_compra = ?, valor_compra = ?, proveedor = ? WHERE codigo = ?', [nombre, descripcion, fechaCompra, valorCompra, proveedor, id])
 
       return 'articulo actualizado con exito'
     } catch (error) {
-      console.log(error)
       return error
     }
   }
 
   static async deleteProduct ({ id }) {
     try {
-      const [res] = await db.query('DELETE FROM products WHERE codigo = ?', [id])
+      await db.query('DELETE FROM products WHERE codigo = ?', [id])
 
       return 'producto eliminado con exito'
     } catch (error) {
