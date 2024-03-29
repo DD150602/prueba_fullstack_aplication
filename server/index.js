@@ -1,14 +1,17 @@
-import express, { json } from 'express'
-import cors from 'cors'
+import express, { json, urlencoded } from 'express'
 import { router } from './routes/routes.js'
 import 'dotenv/config'
 import { PORT } from './config/envVariables.js'
+import cookieParser from 'cookie-parser'
+import corsMiddleware from './middlewares/cors.middleware.js'
 
 const app = express()
 
 app.disable('x-powered-by')
+app.use(urlencoded({ extended: true }))
 app.use(json())
-app.use(cors())
+app.use(corsMiddleware())
+app.use(cookieParser())
 
 app.use('/api', router)
 
