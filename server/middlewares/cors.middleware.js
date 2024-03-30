@@ -1,5 +1,5 @@
 import cors from 'cors'
-import { CorsNotAllowed } from '../schemas/errorSchema'
+import { CorsNotAllowed } from '../schemas/errorSchema.js'
 
 const ACCEPTED_ORIGINS = [
   'http://localhost:5173'
