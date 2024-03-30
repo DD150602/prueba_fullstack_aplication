@@ -14,7 +14,6 @@ export default function ProductCard (props) {
       setNotificacion(`${response}`)
       window.location.reload(true)
     } catch (error) {
-      console.log(error)
     }
   }
 

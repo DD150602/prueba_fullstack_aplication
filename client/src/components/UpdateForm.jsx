@@ -29,7 +29,6 @@ export default function Updateform (props) {
       const response = await getProductById(idProduct)
       setValues(response.data[0])
     } catch (error) {
-      console.log(error)
     }
   }
   const handleSubmit = async (e) => {
@@ -41,11 +40,9 @@ export default function Updateform (props) {
         fechaCompra: dayjs(fecha_compra).format('YYYY-MM-DD'),
         valorCompra: valor_compra
       }
-      const response = await updateProduct({ id: idProduct, product: envio })
-      console.log(response)
+      await updateProduct({ id: idProduct, product: envio })
       window.location.reload(true)
     } catch (error) {
-      console.log(error)
     }
   }
 

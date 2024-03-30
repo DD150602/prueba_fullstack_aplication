@@ -16,13 +16,10 @@ export default function FormSend () {
   const navigate = useNavigate()
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(values)
     try {
-      const response = await createProduct(values)
+      await createProduct(values)
       navigate('/products')
-      console.log(response)
     } catch (error) {
-      console.log(error)
     }
   }
 

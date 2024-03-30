@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { authLogin } from '../api/productApi'
 import useForm from '../hooks/useForm'
 import '../assets/login.css'
+import storage from '../utils/storage'
 
 const defaultValues = {
   userName: '',
@@ -18,6 +19,7 @@ export default function Login () {
     e.preventDefault()
     try {
       const response = await authLogin(values)
+      storage.setItem('accessToken', response.data.accessToken)
       if (response.data.success) navigate('/products')
     } catch (error) {
       setErrorMessage(error)
