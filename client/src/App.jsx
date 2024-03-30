@@ -4,6 +4,7 @@ import Layout from './pages/Layout'
 import Login from './pages/Login'
 import FormSend from './pages/FormSend'
 import AllProducts from './pages/Products'
+import { ProtectedRoute } from './utils/ProtectedRoutes'
 
 const router = createBrowserRouter([
   {
@@ -12,11 +13,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'create',
-        element: <FormSend />
+        element: <ProtectedRoute element={<FormSend />} />
       },
       {
         path: 'products',
-        element: <AllProducts />
+        element: <ProtectedRoute element={<AllProducts />} />
       }
     ]
   },
