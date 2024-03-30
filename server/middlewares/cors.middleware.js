@@ -2,11 +2,12 @@ import cors from 'cors'
 import { CorsNotAllowed } from '../schemas/errorSchema.js'
 
 const ACCEPTED_ORIGINS = [
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'http://localhost:4321'
 ]
 
 export default function corsMiddleware ({ acceptedOrigins = ACCEPTED_ORIGINS } = {}) {
-  cors({
+  return cors({
     origin: (origin, callback) => {
       if (acceptedOrigins.includes(origin)) return callback(null, true)
       if (!origin) return callback(null, true)

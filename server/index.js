@@ -10,7 +10,7 @@ const app = express()
 app.disable('x-powered-by')
 app.use(urlencoded({ extended: true }))
 app.use(json())
-app.use(corsMiddleware)
+app.use(corsMiddleware())
 app.use(cookieParser())
 
 app.use('/api', router)
