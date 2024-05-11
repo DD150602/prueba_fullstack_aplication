@@ -1,13 +1,10 @@
 import db from '../config/dataBase.js'
-import { NoData } from '../schemas/errorSchema.js'
+// import { NoData } from '../schemas/errorSchema.js'
 
 export default class ProductModel {
   static async getAllProducts () {
     try {
       const [res] = await db.query('SELECT codigo, nombre, descripcion, fecha_compra, valor_compra, proveedor FROM products')
-      if (!res) throw new NoData()
-      if (res.length === 0) throw new NoData()
-
       return res
     } catch (error) {
       return error
@@ -17,9 +14,6 @@ export default class ProductModel {
   static async getProductById ({ id }) {
     try {
       const [[res]] = await db.query('SELECT codigo, nombre, descripcion, fecha_compra, valor_compra, proveedor FROM products WHERE codigo = ?', [id])
-      if (!res) throw new NoData()
-      if (res.length === 0) throw new NoData()
-
       return res
     } catch (error) {
       return error
