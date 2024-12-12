@@ -1,24 +1,20 @@
-const ErrorFactory = () => {
-  return class BusinesError extends Error {
-    constructor (error) {
-      super(error.message)
-      this.name = error.name
-      this.status = error.statusCode
-    }
+class BusinesError extends Error {
+  constructor (message, statusCode = 500) {
+    super(message)
+    this.status = statusCode
+  }
 
-    validationError () {
-      return {
-        name: this.name,
-        status: this.status,
-        message: this.message
-      }
+  validationError () {
+    return {
+      status: this.status,
+      message: this.message
     }
   }
 }
 
-export const NoData = ErrorFactory()
-export const NotFoundUser = ErrorFactory()
-export const InvalidCredential = ErrorFactory()
-export const CorsNotAllowed = ErrorFactory()
-export const UnknownError = ErrorFactory()
-export const CantCreate = ErrorFactory()
+export const NoData = new BusinesError('No existen productos', 404)
+export const NotFoundUser = new BusinesError()
+export const InvalidCredential = new BusinesError()
+export const CorsNotAllowed = new BusinesError()
+export const UnknownError = new BusinesError()
+export const CantCreate = new BusinesError()

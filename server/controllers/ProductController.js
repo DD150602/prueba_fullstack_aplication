@@ -5,11 +5,7 @@ export default class ProductController {
   static async getAllProducts (req, res, next) {
     const response = await ProductModel.getAllProducts()
     if (response.length === 0) {
-      const error = new NoData({
-        message: 'No existen productos',
-        name: 'NoData',
-        statusCode: 404
-      })
+      const error = NoData
       return next(error)
     }
     return res.json(response)
@@ -18,15 +14,15 @@ export default class ProductController {
   static async getProductById (req, res, next) {
     const { id } = req.params
     const response = await ProductModel.getProductById({ id })
-    if (response.length === 0) {
-      const error = new NoData({
-        message: 'el producto no existe',
-        name: 'NoData',
-        statusCode: 404
-      })
+    if (!response) {
+      const error = NoData
       return next(error)
     }
-    res.json(response)
+    if (response.length === 0) {
+      const error = NoData
+      return next(error)
+    }
+    return res.json(response)
   }
 
   static async createProduct (req, res, next) {
